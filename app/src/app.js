@@ -1,7 +1,9 @@
 const express = require('express');
-const database = require('./database');
-const routes = require('./routes/eventos.routes');
 require('dotenv').config({ path: '.env' });
+
+const database = require('./database');
+const eventosRoutes = require('./routes/eventos.routes');
+const eventosFechasRoutes = require('./routes/eventosFechas.routes');
 
 database.authenticate()
     .then(() => console.log('Successful database connection'))
@@ -12,7 +14,8 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/eventos', routes);
+app.use('/eventos', eventosRoutes);
+app.use('/eventosFechas', eventosFechasRoutes);
 
 const server = app.listen(process.env.PORT, () => {
     console.log(`Server listen on port ${process.env.PORT}`);

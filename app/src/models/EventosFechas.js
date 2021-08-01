@@ -32,6 +32,7 @@ const EventosFechas = db.define('EventosFechas', {
     }
 }, {
     timestamps: false,
+    tableName:'EventosFechas',
     hooks: {
         beforeValidate(evento) {
             evento.created = new Date();

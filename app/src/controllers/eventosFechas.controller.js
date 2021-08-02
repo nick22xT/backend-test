@@ -1,4 +1,4 @@
-const { EventoFecha } = require('../models/Models');
+const { EventoFecha, Evento } = require('../models/Models');
 const { Op } = require("sequelize");
 const moment = require('moment');
 
@@ -44,11 +44,39 @@ const getEventoFechaById = async (req, res) => {
 }
 
 const addEventoFecha = async (req, res) => {
+    try {
+        let record = req.body;
 
+        if (await Evento.count({ where: { eventoId: record.eventoId } }) == 0)
+            return res.status(400).json(`No se encontro Evento con ID ${record.eventoId}`);
+
+        record = await EventoFecha.create(record);
+
+        return res.status(200).json(record);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json('Ocurrió un error inesperado. Intente nuevamente mas tarde.');
+    }
 }
 
 const updateEventoFecha = async (req, res) => {
+    try {
+        const { id } = req.params;
+        let record = req.body;
 
+        if (await EventoFecha.count({ where: { eventoFechaId: id } }) == 0)
+            return res.status(400).json(`No se encontro EventoFecha con ID ${record.eventoId}`);
+
+        if (await Evento.count({ where: { eventoId: record.eventoId } }) == 0)
+            return res.status(400).json(`No se encontro Evento con ID ${record.eventoId}`);
+
+        await EventoFecha.update(record, { where: { eventoFechaId: id } });
+
+        return res.status(200).json(record);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json('Ocurrió un error inesperado. Intente nuevamente mas tarde.');
+    }
 }
 
 const deleteEventoFecha = async (req, res) => {
@@ -61,7 +89,7 @@ const deleteEventoFecha = async (req, res) => {
 
         await record.destroy();
 
-        return res.status(400).json(record);
+        return res.status(200).json(record);
     } catch (error) {
         console.error(error);
         return res.status(500).json('Ocurrió un error inesperado. Intente nuevamente mas tarde.');

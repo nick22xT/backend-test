@@ -2,7 +2,7 @@ CREATE SCHEMA IF NOT EXISTS `EventosDB`;
 
 CREATE TABLE IF NOT EXISTS `EventosDB`.`Users` (
 	UserId INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    Email NVARCHAR(25) NOT NULL,
+    Username NVARCHAR(25) NOT NULL,
     Password NVARCHAR(255) NOT NULL,
     Created DATETIME NOT NULL,
 	Updated DATETIME NULL
@@ -32,3 +32,6 @@ CREATE TABLE IF NOT EXISTS `EventosDB`.`EventosFechas` (
 ALTER TABLE `EventosDB`.`EventosFechas`
 ADD CONSTRAINT FK_Eventos_EventosFechas_EventoId FOREIGN KEY(EventoId) REFERENCES `EventosDB`.`Eventos`(EventoId);
 
+#Creacion de usuario
+INSERT INTO `EventosDB`.`Users`
+VALUES(DEFAULT, 'test', '$2b$10$lhizqGxAMI0Ki8sOld8.3uB8bYst/LCSUQK0Y57GTvjq1EEzxLrye', '2021-08-03 02:07:56', NULL);

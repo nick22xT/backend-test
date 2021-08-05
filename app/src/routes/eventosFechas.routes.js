@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/eventosFechas.controller');
-const validations = require('../middlewares/validateFechasRequest');
+const validations = require('../middlewares/validations/eventosFechasValidations.middleware');
+const { authenticate } = require('../middlewares/jwt.middleware');
 
-router.get('/', validations.validateSearchFechas, controller.searchEventosFechas);
-router.get('/:id', validations.validateGetEventoFecha, controller.getEventoFechaById);
-router.post('/', validations.validatePostEventoFecha, controller.addEventoFecha);
-router.put('/:id', validations.validatePutEventoFecha, controller.updateEventoFecha);
-router.delete('/:id', validations.validateDeleteEventoFecha, controller.deleteEventoFecha);
+router.get('/', authenticate, validations.validateSearchFechas, controller.searchEventosFechas);
+router.get('/:id', authenticate, validations.validateGetEventoFecha, controller.getEventoFechaById);
+router.post('/', authenticate, validations.validatePostEventoFecha, controller.addEventoFecha);
+router.put('/:id', authenticate, validations.validatePutEventoFecha, controller.updateEventoFecha);
+router.delete('/:id', authenticate, validations.validateDeleteEventoFecha, controller.deleteEventoFecha);
 
 module.exports = router;

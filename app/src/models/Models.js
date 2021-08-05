@@ -1,38 +1,73 @@
-const Sequelize = require('sequelize');
+const { DataTypes } = require('sequelize');
 const db = require('../database');
+
+const User = db.define('Users', {
+    userId: {
+        type: DataTypes.INTEGER(11),
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
+    },
+    username: {
+        type: DataTypes.STRING(50),
+        allowNull: false
+    },
+    password: {
+        type: DataTypes.STRING(255),
+        allowNull: false
+    },
+    created: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    updated: {
+        type: DataTypes.DATE
+    }
+
+}, {
+    timestamps: false,
+    hooks: {
+        beforeValidate(user) {
+            user.created = new Date();
+        },
+        beforeUpdate(user) {
+            user.updated = new Date();
+        }
+    }
+});
 
 const Evento = db.define('Eventos', {
     eventoId: {
-        type: Sequelize.INTEGER(11),
+        type: DataTypes.INTEGER(11),
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
     },
     titulo: {
-        type: Sequelize.STRING(255),
+        type: DataTypes.STRING(255),
         allowNull: false
     },
     descripcion: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     lugar: {
-        type: Sequelize.STRING(255),
+        type: DataTypes.STRING(255),
         allowNull: false
     },
     destacado: {
-        type: Sequelize.BOOLEAN,
+        type: DataTypes.BOOLEAN,
         allowNull: false
     },
     imagen: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING
     },
     created: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         allowNull: false
     },
     updated: {
-        type: Sequelize.DATE
+        type: DataTypes.DATE
     }
 }, {
     timestamps: false,
@@ -48,32 +83,32 @@ const Evento = db.define('Eventos', {
 
 const EventoFecha = db.define('EventosFechas', {
     eventoFechaId: {
-        type: Sequelize.INTEGER(11),
+        type: DataTypes.INTEGER(11),
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
     },
     eventoId: {
-        type: Sequelize.INTEGER(11),
+        type: DataTypes.INTEGER(11),
         allowNull: false
     },
     inicio: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         allowNull: false
     },
     fin: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         allowNull: false
     },
     precio: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
     },
     created: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         allowNull: false
     },
     updated: {
-        type: Sequelize.DATE
+        type: DataTypes.DATE
     }
 }, {
     timestamps: false,
@@ -90,4 +125,4 @@ const EventoFecha = db.define('EventosFechas', {
 Evento.EventosFechas = Evento.hasMany(EventoFecha, { as: 'eventosFechas', foreignKey: 'eventoId' });
 EventoFecha.Evento = EventoFecha.belongsTo(Evento, { as: 'evento', foreignKey: 'eventoId' });
 
-module.exports = { Evento, EventoFecha };
+module.exports = { User, Evento, EventoFecha };

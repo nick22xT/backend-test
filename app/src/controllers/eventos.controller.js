@@ -19,7 +19,7 @@ const getEventos = async (req, res) => {
                         [Op.eq]: Sequelize.literal(`(
                             SELECT MIN(Inicio)
                                 FROM EventosFechas
-                            WHERE Inicio > NOW()
+                            WHERE Inicio >= NOW()
                               AND EventoId = Eventos.EventoId
                         )`)
                     }
@@ -40,7 +40,7 @@ const getEventos = async (req, res) => {
 const getEventoById = async (req, res) => {
     try {
         const { id } = req.params;
-        const record = await Evento.findByPk(id);
+        const record = await Evento.findByPk(id, { include: { association: Evento.EventosFechas } });
 
         if (!record)
             return res.status(400).json(`No se encontró Evento con ID ${id}.`);
@@ -104,6 +104,41 @@ const deleteEvento = async (req, res) => {
     }
 }
 
+const publicarEvento = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const evento = await Evento.findByPk(id, {
+            include: {
+                association: Evento.EventosFechas,
+                where: {
+                    inicio: {
+                        [Op.eq]: Sequelize.literal(`(
+                            SELECT MIN(Inicio)
+                                FROM EventosFechas
+                            WHERE Inicio >= NOW()
+                              AND EventoId = Eventos.EventoId
+                        )`)
+                    }
+                }
+            }
+        });
+
+        if (!evento)
+            return res.status(400).json(`No se encontró Evento con ID ${id}.`);
+
+        if (evento.eventosFechas.length === 0)
+            return res.status(400).json("El evento se encuentra actualmente vencido.");
+
+        const link = `http://${req.headers.host}/eventos/${id}`;
+        const fecha = moment(evento.eventosFechas[0].inicio).format("DD/MM/YYYY HH:mm");
+
+        return res.status(200).json(`Iré al evento ${evento.titulo} @ ${fecha} ${link}`);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json('Ocurrió un error inesperado. Intente nuevamente mas tarde.');
+    }
+}
+
 const eventoExist = async (id) => await Evento.count({ where: { eventoId: id } }) > 0;
 
-module.exports = { getEventos, getEventoById, addEvento, updateEvento, deleteEvento };
+module.exports = { getEventos, getEventoById, addEvento, updateEvento, deleteEvento, publicarEvento };

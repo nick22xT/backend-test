@@ -31,7 +31,7 @@ const searchEventosFechas = async (req, res) => {
 const getEventoFechaById = async (req, res) => {
     try {
         const { id } = req.params;
-        const record = await EventoFecha.findByPk(id);
+        const record = await EventoFecha.findByPk(id, { include: { association: EventoFecha.Evento } });
 
         if (!record)
             return res.status(400).json(`No se encontró EventoFecha con ID ${id}.`);

@@ -6,7 +6,7 @@ require('dotenv').config({ path: '.env' });
 
 const database = require('./database');
 const eventosRoutes = require('./routes/eventos.routes');
-const eventosFechasRoutes = require('./routes/eventosFechas.routes');
+const eventosFechasRoutes = require('./routes/fechas.routes');
 const authRoutes = require('./routes/auth.routes');
 
 database.authenticate()

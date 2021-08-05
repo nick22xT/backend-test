@@ -1,14 +1,6 @@
 const moment = require('moment');
-const { query, validationResult, body, param } = require("express-validator");
-
-const validateRequest = (req, res, next) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty())
-        return res.status(400).json(errors);
-
-    next();
-}
+const { query, body, param } = require("express-validator");
+const { validateRequest } = require('./shared.middleware');
 
 const checkEventosFechas = (fechas = []) => {
     fechas.forEach(fecha => {
@@ -40,11 +32,6 @@ const validateSearchEvents = [
     validateRequest
 ];
 
-const validateGetEvent = [
-    param('id', 'El parametro id de la url no esta definido o no es valido.').exists().isNumeric(),
-    validateRequest
-];
-
 const valitatePostEvent = [
     body('titulo', 'El titulo del evento es requerido.').exists().isString().notEmpty(),
     body('descripcion', 'La descripción del evento es requerida.').exists().isString().notEmpty(),
@@ -67,9 +54,4 @@ const validatePutEvent = [
     validateRequest
 ];
 
-const validateDeleteEvent = [
-    param('id', 'El parametro id de la url no esta definido o no es valido.').exists().isNumeric(),
-    validateRequest
-];
-
-module.exports = { validateSearchEvents, validateGetEvent, valitatePostEvent, validatePutEvent, validateDeleteEvent };
+module.exports = { validateSearchEvents, valitatePostEvent, validatePutEvent };

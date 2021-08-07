@@ -4,7 +4,7 @@ const { Evento, EventoFecha } = require('../models/Models');
 
 const getEventos = async (req, res) => {
     try {
-        const { destacados, pageSize = 4, pageIndex = 1 } = req.query;
+        const { destacados, pageSize, pageIndex } = req.query;
         const search = {};
 
         if (destacados)

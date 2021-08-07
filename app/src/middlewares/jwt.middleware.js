@@ -8,8 +8,8 @@ const authenticate = async (req, res, next) => {
 
         if (!token) {
             if (isSearchEventos(req.method, req.baseUrl)) {
-                req.query.pageSize = null;
-                req.query.pageIndex = null;
+                req.query.pageSize = 4;
+                req.query.pageIndex = 1;
                 return next();
             } else {
                 return res.status(401).json("Acceso denegado.");
@@ -23,8 +23,8 @@ const authenticate = async (req, res, next) => {
 
         if (!user) {
             if (isSearchEventos(req.method, req.baseUrl)) {
-                req.query.pageSize = null;
-                req.query.pageIndex = null;
+                req.query.pageSize = 4;
+                req.query.pageIndex = 1;
                 return next();
             } else {
                 return res.status(401).json("Acceso denegado.");
@@ -37,8 +37,8 @@ const authenticate = async (req, res, next) => {
     } catch (error) {
         if (error.name === 'TokenExpiredError') {
             if (isSearchEventos(req.method, req.baseUrl)) {
-                req.query.pageSize = null;
-                req.query.pageIndex = null;
+                req.query.pageSize = 4;
+                req.query.pageIndex = 1;
                 return next();
             } else {
                 return res.status(401).json("Acceso denegado.");

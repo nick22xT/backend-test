@@ -8,7 +8,7 @@ const getEventos = async (req, res) => {
         const search = {};
 
         if (destacados)
-            search.destacado = destacados.toLowerCase() === 'true';
+            search.destacado = destacados;
 
         const resp = await Evento.findAll({
             where: search,

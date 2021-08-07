@@ -6,28 +6,50 @@ const authenticate = async (req, res, next) => {
     try {
         let token = req.headers["authorization"];
 
-        if (!token)
-            return res.status(401).json("Acceso denedago.");
+        if (!token) {
+            if (isSearchEventos(req.method, req.baseUrl)) {
+                req.query.pageSize = null;
+                req.query.pageIndex = null;
+                return next();
+            } else {
+                return res.status(401).json("Acceso denegado.");
+            }
+        }
 
         token = token.substring(token.indexOf(" ") + 1, token.length);
 
         const decode = jwt.verify(token, process.env.JWT_SECRET);
-        const user = await User.findByPk(decode.userId);
+        const user = await User.findByPk(decode.userId ? decode.userId : 0);
 
-        if (!user)
-            return res.status(401).json("Acceso denedago.");
+        if (!user) {
+            if (isSearchEventos(req.method, req.baseUrl)) {
+                req.query.pageSize = null;
+                req.query.pageIndex = null;
+                return next();
+            } else {
+                return res.status(401).json("Acceso denegado.");
+            }
+        }
 
         req.jwtUser = { userId: user.userId, username: user.username };
 
         next();
     } catch (error) {
-        console.error(error);
-        return res.status(500).json('Ocurrió un error inesperado. Intente nuevamente mas tarde.');
+        if (error.name === 'TokenExpiredError') {
+            if (isSearchEventos(req.method, req.baseUrl)) {
+                req.query.pageSize = null;
+                req.query.pageIndex = null;
+                return next();
+            } else {
+                return res.status(401).json("Acceso denegado.");
+            }
+        } else {
+            console.error(error);
+            return res.status(500).json('Ocurrió un error inesperado. Intente nuevamente mas tarde.');
+        }
     }
 }
 
-const authenticateSearchEvent = async (req, res, next) => {
-    next();
-}
+const isSearchEventos = (method, baseUrl) => method === 'GET' && baseUrl === '/eventos';
 
-module.exports = { authenticate, authenticateSearchEvent };
+module.exports = { authenticate };

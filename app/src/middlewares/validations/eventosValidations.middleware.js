@@ -28,7 +28,9 @@ const checkMatchIdEventoId = (id, { req }) => {
 }
 
 const validateSearchEvents = [
-    query('destacados').optional({ nullable: true, checkFalsy: true }).isBoolean(),
+    query('destacados').optional({ nullable: true, checkFalsy: true }).isBoolean().toBoolean(),
+    query('pageSize').optional({ nullable: true, checkFalsy: true }).isNumeric().toInt(),
+    query('pageIndex').optional({ nullable: true, checkFalsy: true }).isNumeric().toInt(),
     validateRequest
 ];
 

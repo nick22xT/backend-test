@@ -4,14 +4,14 @@ const { Evento, EventoFecha } = require('../models/Models');
 
 const getEventos = async (req, res) => {
     try {
-        const { destacados } = req.query;
-        const filters = {};
+        const { destacados, pageSize = 4, pageIndex = 1 } = req.query;
+        const search = {};
 
         if (destacados)
-            filters.destacado = destacados.toLowerCase() === 'true';
+            search.destacado = destacados.toLowerCase() === 'true';
 
         const resp = await Evento.findAll({
-            where: filters,
+            where: search,
             include: {
                 association: Evento.EventosFechas,
                 where: {
@@ -27,10 +27,20 @@ const getEventos = async (req, res) => {
             },
             order: [
                 [{ model: EventoFecha, as: 'eventosFechas' }, 'inicio', 'ASC']
-            ]
+            ],
+            limit: pageSize,
+            offset: (pageIndex * pageSize) - pageSize
         });
 
-        return res.status(200).json(resp);
+        return res.status(200).json({
+            totalCount: resp.length,
+            res: resp,
+            search: {
+                destacados,
+                pageSize,
+                pageIndex
+            }
+        });
     } catch (error) {
         console.error(error);
         return res.status(500).json('Ocurrió un error inesperado. Intente nuevamente mas tarde.');

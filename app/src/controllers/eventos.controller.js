@@ -55,7 +55,7 @@ const getEventoById = async (req, res) => {
         if (!record)
             return res.status(400).json(`No se encontró Evento con ID ${id}.`);
 
-        return res.status(400).json(record);
+        return res.status(200).json(record);
     } catch (error) {
         console.error(error);
         return res.status(500).json('Ocurrió un error inesperado. Intente nuevamente mas tarde.');

@@ -7,7 +7,7 @@ const checkDateRange = (inicio, { req }) => {
     const finDate = moment(req.body.fin, 'YYYY-MM-DDTHH:mm:ssZ', true);
 
     if (inicioDate.isBefore(moment()))
-        throw new Error("La fecha de inicio no puede ser mayor a la fecha actual.");
+        throw new Error("La fecha de inicio no puede ser menor a la fecha actual.");
     if (inicioDate.isAfter(finDate))
         throw new Error("La fecha de inicio no puede ser mayor a la fecha de fin.");
 
@@ -22,14 +22,14 @@ const checkMatchIdEventoFechaId = (id, { req }) => {
 }
 
 const validateSearchFechas = [
-    query('eventoId', 'El valor de eventoId no es valido').optional({ nullable: true, checkFalsy: true }).isNumeric(),
+    query('eventoId', 'El valor de eventoId no es valido').optional({ nullable: true, checkFalsy: true }).isNumeric().toInt(),
     query('fromDate', 'El valor de fromDate no es valido').optional({ nullable: true, checkFalsy: true }).isISO8601(),
     query('toDate', 'El valor de toDate no es valido').optional({ nullable: true, checkFalsy: true }).isISO8601(),
     validateRequest
 ];
 
 const validatePostEventoFecha = [
-    body('eventoId', 'El eventoId no esta definido o no es valido').exists().isNumeric().notEmpty(),
+    body('eventoId', 'El eventoId no esta definido o no es valido').exists().isNumeric().notEmpty().toInt(),
     body('inicio', 'La fecha de inicio no esta definida o no es valida').exists().isISO8601().notEmpty(),
     body('fin', 'La fecha de fin no esta definida o no es valida').exists().isISO8601().notEmpty(),
     body('inicio').custom(checkDateRange),
@@ -38,10 +38,10 @@ const validatePostEventoFecha = [
 ];
 
 const validatePutEventoFecha = [
-    param('id', 'El parametro id de la url no esta definido o no es valido.').exists().isNumeric(),
-    body('eventoFechaId', 'El id de la fecha no esta definido o no es valido.').exists().isNumeric(),
+    param('id', 'El parametro id de la url no esta definido o no es valido.').exists().isNumeric().toInt(),
+    body('eventoFechaId', 'El id de la fecha no esta definido o no es valido.').exists().isNumeric().toInt(),
     param('id').custom(checkMatchIdEventoFechaId),
-    body('eventoId', 'El eventoId no esta definido o no es valido').exists().isNumeric().notEmpty(),
+    body('eventoId', 'El eventoId no esta definido o no es valido').exists().isNumeric().notEmpty().toInt(),
     body('inicio', 'La fecha de inicio no esta definida o no es valida').exists().isISO8601().notEmpty(),
     body('fin', 'La fecha de fin no esta definida o no es valida').exists().isISO8601().notEmpty(),
     body('inicio').custom(checkDateRange),

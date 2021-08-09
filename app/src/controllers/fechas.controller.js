@@ -21,7 +21,15 @@ const searchEventosFechas = async (req, res) => {
             }
         });
 
-        return res.status(200).json(resp);
+        return res.status(200).json({
+            totalCount: resp.length,
+            res: resp,
+            search: {
+                eventoId,
+                fromDate,
+                toDate
+            }
+        });
     } catch (error) {
         console.error(error);
         return res.status(500).json('Ocurrió un error inesperado. Intente nuevamente mas tarde.');
@@ -36,7 +44,7 @@ const getEventoFechaById = async (req, res) => {
         if (!record)
             return res.status(400).json(`No se encontró EventoFecha con ID ${id}.`);
 
-        return res.status(400).json(record);
+        return res.status(200).json(record);
     } catch (error) {
         console.error(error);
         return res.status(500).json('Ocurrió un error inesperado. Intente nuevamente mas tarde.');

@@ -12,7 +12,7 @@ const checkEventosFechas = (fechas = []) => {
         if (!fin.isValid())
             throw new Error("La fecha de fin no es valida.");
         if (inicio.isBefore(moment()))
-            throw new Error("La fecha de inicio no puede ser mayor a la fecha actual.");
+            throw new Error("La fecha de inicio no puede ser menor a la fecha actual.");
         if (inicio.isAfter(fin))
             throw new Error("La fecha de inicio no puede ser mayor a la fecha de fin.");
     });
@@ -46,8 +46,8 @@ const valitatePostEvent = [
 ];
 
 const validatePutEvent = [
-    param('id', 'El parametro id de la url no esta definido o no es valido.').exists().isNumeric(),
-    body('eventoId', 'El id del evento no esta definido o no es valido.').exists().isNumeric(),
+    param('id', 'El parametro id de la url no esta definido o no es valido.').exists().isNumeric().toInt(),
+    body('eventoId', 'El id del evento no esta definido o no es valido.').exists().isNumeric().toInt(),
     param('id').custom(checkMatchIdEventoId),
     body('titulo', 'El titulo del evento es requerido.').exists().isString().notEmpty(),
     body('descripcion', 'La descripción del evento es requerida.').exists().isString().notEmpty(),

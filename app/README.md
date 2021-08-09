@@ -173,7 +173,9 @@ http://{SERVER_URL}/eventosFechas?eventoId=2&fromDate=2021-08-24T12:00:00.000Z&t
 - **BaseUrl:** /eventosFechas/{id}
 - **Tipo:** GET
 - **Url Params:**
-  - **id:** es el ID del eventoFecha que se quiere obtener, es de tipo numeric **(requerido)**. 
+  - **id:** es el ID del eventoFecha que se quiere obtener, es de tipo numeric **(requerido)**.
+- **Headers:**
+  - **Authorization:** contiene el token de autenticacion del usuario. Es de tipo **Bearer Token**.
 ````
 http://{SERVER_URL}/eventosFechas/3
 ````

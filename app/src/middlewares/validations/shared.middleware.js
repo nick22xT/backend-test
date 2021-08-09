@@ -1,4 +1,4 @@
-const { body, param, validationResult } = require("express-validator");
+const { param, validationResult } = require("express-validator");
 
 const validateRequest = (req, res, next) => {
     const errors = validationResult(req);

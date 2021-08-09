@@ -10,6 +10,6 @@ router.get('/:id', idByParamValidation, controller.getEventoById);
 router.post('/', authenticate, valitatePostEvent, controller.addEvento);
 router.put('/:id', authenticate, validatePutEvent, controller.updateEvento);
 router.delete('/:id', authenticate, idByParamValidation, controller.deleteEvento);
-router.get('/:id/publicar', authenticate, controller.publicarEvento);
+router.get('/:id/compartir', controller.compartirEvento);
 
 module.exports = router;

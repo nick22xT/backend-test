@@ -114,7 +114,7 @@ const deleteEvento = async (req, res) => {
     }
 }
 
-const publicarEvento = async (req, res) => {
+const compartirEvento = async (req, res) => {
     try {
         const { id } = req.params;
         const evento = await Evento.findByPk(id, {
@@ -151,4 +151,4 @@ const publicarEvento = async (req, res) => {
 
 const eventoExist = async (id) => await Evento.count({ where: { eventoId: id } }) > 0;
 
-module.exports = { getEventos, getEventoById, addEvento, updateEvento, deleteEvento, publicarEvento };
+module.exports = { getEventos, getEventoById, addEvento, updateEvento, deleteEvento, compartirEvento };

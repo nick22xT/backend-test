@@ -25,7 +25,7 @@ app.use('/eventos', eventosRoutes);
 app.use('/eventosFechas', eventosFechasRoutes);
 app.use('/auth', authRoutes);
 
-const server = app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT || 3000, () => {
     console.log(`Server listen on port ${process.env.PORT}`);
 });
 

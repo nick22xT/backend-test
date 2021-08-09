@@ -4,10 +4,10 @@ const { Evento, EventoFecha } = require('../models/Models');
 
 const getEventos = async (req, res) => {
     try {
-        const { destacados, pageSize, pageIndex } = req.query;
+        const { destacados, pageSize = 4, pageIndex = 1 } = req.query;
         const search = {};
 
-        if (destacados)
+        if (destacados !== null && destacados !== undefined)
             search.destacado = destacados;
 
         const resp = await Evento.findAll({

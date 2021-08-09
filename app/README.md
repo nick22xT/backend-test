@@ -22,6 +22,10 @@ Para que el proyecto funcione correctamente en de forma local, se debe de crear 
 - **JWT_SECRET:** secret con el cual se codifican / decodifican las contraseñas de los usuarios (recomendado para probar: trabajo-final-node-nico).
 - **PORT (Opcional):** puerto por el cual se va a acceder al servicio (por defecto 3000).
 
+## Documentación
+En la carpeta **docs** se encuentran los request de Postman que se usaron para las pruebas de las APIS.
+Reemplazar la seccion de la Url que dice **localhots:3000** por **app-eventos-service.herokuapp.com** para apuntar al servicio desplegado eh Heroku.
+
 ## Endpoints
 ### Login
 - **Descripcion:** autentica un usuario en el sistema.

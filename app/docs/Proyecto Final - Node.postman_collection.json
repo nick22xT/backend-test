@@ -1,0 +1,447 @@
+{
+	"info": {
+		"_postman_id": "c2d24132-620e-4609-87ac-1b886e8792f3",
+		"name": "Proyecto Final - Node",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test\",\r\n    \"password\": \"test123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Eventos Fechas",
+			"item": [
+				{
+					"name": "EventosFechas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdCIsImlhdCI6MTYyODQ2Njk4OCwiZXhwIjoxNjI4NTUzMzg4fQ.SfO31dI7XlX3qD1nZk3TluIl8yGDA_j77OOMOalVgLg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/eventosFechas?eventoId=2&fromDate=2021-08-24T12:00:00.000Z&toDate=2021-11-26T12:00:00.000Z",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventosFechas"
+							],
+							"query": [
+								{
+									"key": "eventoId",
+									"value": "2"
+								},
+								{
+									"key": "fromDate",
+									"value": "2021-08-24T12:00:00.000Z"
+								},
+								{
+									"key": "toDate",
+									"value": "2021-11-26T12:00:00.000Z"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EventoFecha by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdCIsImlhdCI6MTYyODQ2Njk4OCwiZXhwIjoxNjI4NTUzMzg4fQ.SfO31dI7XlX3qD1nZk3TluIl8yGDA_j77OOMOalVgLg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/eventosFechas/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventosFechas",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add EventoFecha",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdCIsImlhdCI6MTYyODQ2Njk4OCwiZXhwIjoxNjI4NTUzMzg4fQ.SfO31dI7XlX3qD1nZk3TluIl8yGDA_j77OOMOalVgLg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"eventoId\": 2,\r\n    \"inicio\": \"2021-08-25T12:00:00Z\",\r\n    \"fin\": \"2021-08-26T12:00:00Z\",\r\n    \"precio\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/eventosFechas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventosFechas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update EventoTarea",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdCIsImlhdCI6MTYyODQ2Njk4OCwiZXhwIjoxNjI4NTUzMzg4fQ.SfO31dI7XlX3qD1nZk3TluIl8yGDA_j77OOMOalVgLg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"eventoFechaId\": 4,\r\n    \"eventoId\": 2,\r\n    \"inicio\": \"2021-09-26T12:00:00.000Z\",\r\n    \"fin\": \"2021-10-26T12:00:00.000Z\",\r\n    \"precio\": 20000000,\r\n    \"created\": \"2021-08-01T01:06:12.000Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/eventosFechas/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventosFechas",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete EventoFecha",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdCIsImlhdCI6MTYyODQ2OTU1MSwiZXhwIjoxNjI4NTU1OTUxfQ.aqqMx2BxkGAm-thCL64faZXLEQbOM5V_RbMtf5x6I5A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/eventosFechas/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventosFechas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Eventos",
+			"item": [
+				{
+					"name": "Eventos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdCIsImlhdCI6MTYyODQ2MDY4OSwiZXhwIjoxNjI4NTQ3MDg5fQ.Jy5c_LRHwNhaUh89EpFXzPe6CfUrhmHjkdfKqHZGUeQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/eventos?destacados=false&pageSize=2&pageIndex=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventos"
+							],
+							"query": [
+								{
+									"key": "destacados",
+									"value": "false"
+								},
+								{
+									"key": "pageSize",
+									"value": "2"
+								},
+								{
+									"key": "pageIndex",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Evento by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdCIsImlhdCI6MTYyODEyODQ5OCwiZXhwIjoxNjI4MjE0ODk4fQ.G0Vn_0Ec6EK4lEVYsb5uL_bbxLXLHA5q_8dwLPls4D4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/eventos/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Compartir Evento",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdCIsImlhdCI6MTYyODEyODQ5OCwiZXhwIjoxNjI4MjE0ODk4fQ.G0Vn_0Ec6EK4lEVYsb5uL_bbxLXLHA5q_8dwLPls4D4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/eventos/2/compartir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventos",
+								"2",
+								"compartir"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Evento",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdCIsImlhdCI6MTYyODQ2OTU1MSwiZXhwIjoxNjI4NTU1OTUxfQ.aqqMx2BxkGAm-thCL64faZXLEQbOM5V_RbMtf5x6I5A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Prueba POST Evento 5\",\r\n    \"descripcion\": \"Esta es una prueba de la API POST de Eventos\",\r\n    \"lugar\": \"Algun lugar\",\r\n    \"destacado\": false,\r\n    \"eventosFechas\": [\r\n        {\r\n            \"inicio\": \"2021-09-26T12:00:00Z\",\r\n            \"fin\": \"2021-10-26T12:00:00Z\",\r\n            \"precio\": 4\r\n        },\r\n        {\r\n            \"inicio\": \"2021-08-26T12:00:00Z\",\r\n            \"fin\": \"2021-09-26T12:00:00Z\",\r\n            \"precio\": 0\r\n        },\r\n        {\r\n            \"inicio\": \"2021-11-26T12:00:00Z\",\r\n            \"fin\": \"2021-12-28T12:00:00Z\",\r\n            \"precio\": 0\r\n        },\r\n        {\r\n            \"inicio\": \"2021-08-24T12:00:00Z\",\r\n            \"fin\": \"2021-09-26T12:00:00Z\",\r\n            \"precio\": 0\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/eventos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Event",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdCIsImlhdCI6MTYyODQ2OTU1MSwiZXhwIjoxNjI4NTU1OTUxfQ.aqqMx2BxkGAm-thCL64faZXLEQbOM5V_RbMtf5x6I5A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"eventoId\": 2,\r\n    \"titulo\": \"Prueba POST Evento 2\",\r\n    \"descripcion\": \"Esta es una prueba de la API POST de Eventos\",\r\n    \"lugar\": \"Algun lugar\",\r\n    \"destacado\": false,\r\n    \"imagen\": \"https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?w=800\",\r\n    \"created\": \"2021-08-01T01:06:12.000Z\",\r\n    \"updated\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/eventos/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Event",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdCIsImlhdCI6MTYyODQ2MDY4OSwiZXhwIjoxNjI4NTQ3MDg5fQ.Jy5c_LRHwNhaUh89EpFXzPe6CfUrhmHjkdfKqHZGUeQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/eventos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

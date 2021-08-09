@@ -56,7 +56,7 @@ Para que el proyecto funcione correctamente en de forma local, se debe de crear 
 http://{SERVER_URL}/eventos?destacados=true&pageSize=10&pageIndex=1
 ````
 
-### Get Eventos by ID
+### Get Evento by ID
 - **Descripcion:** obtiene un evento de la base de datos por su clave primaria.
 - **BaseUrl:** /eventos/{id}
 - **Tipo:** GET
@@ -168,7 +168,7 @@ http://{SERVER_URL}/eventos/3/compartir
 http://{SERVER_URL}/eventosFechas?eventoId=2&fromDate=2021-08-24T12:00:00.000Z&toDate=2021-11-26T12:00:00.000Z
 ````
 
-### Get EventosFechas by ID
+### Get EventoFecha by ID
 - **Descripcion:** obtiene un eventoFecha de la base de datos por su clave primaria.
 - **BaseUrl:** /eventosFechas/{id}
 - **Tipo:** GET
